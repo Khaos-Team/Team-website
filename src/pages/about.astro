@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import { Shield, Target, Zap, Globe, Cpu } from 'lucide-vue-next';
+---
+
+<Layout title="About">
+	<div class="max-w-7xl mx-auto px-4 py-20">
+		<header class="mb-20">
+			<h1 class="text-5xl font-black tracking-tighter mb-4 uppercase italic">Operational Overview</h1>
+			<p class="text-zinc-500 max-w-2xl font-mono uppercase tracking-widest text-sm">Khaos is an elite Capture The Flag (CTF) team dedicated to the study of complex systems and vulnerability research.</p>
+		</header>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start mb-32">
+			<div class="space-y-12">
+				<section>
+					<h2 class="text-xl font-black tracking-tighter uppercase mb-4 flex items-center gap-2">
+						<Target class="w-5 h-5 text-accent-purple" />
+						CTF Mission
+					</h2>
+					<p class="text-zinc-400 leading-relaxed text-sm md:text-base">
+						Our objective is the pursuit of technical excellence through competitive Capture The Flag (CTF) events. We focus on identifying architectural flaws and developing sophisticated exploits within controlled, high-stakes environments.
+					</p>
+				</section>
+
+				<section>
+					<h2 class="text-xl font-black tracking-tighter uppercase mb-4 flex items-center gap-2">
+						<Cpu class="w-5 h-5 text-accent-cyan" />
+						Methodology
+					</h2>
+					<p class="text-zinc-400 leading-relaxed text-sm md:text-base">
+						We operate with a research-first mindset. Every operation is an opportunity to refine our tooling, deepen our understanding of low-level systems, and contribute to the broader security discourse through detailed technical writeups.
+					</p>
+				</section>
+
+				<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+					<div class="p-6 rounded-xl border border-stealth bg-graphite/30">
+						<div class="text-xs font-bold text-white uppercase mb-2">Vulnerability Research</div>
+						<p class="text-[10px] text-zinc-500 leading-relaxed">Focus on binary exploitation, heap manipulation, and cryptographic primitives.</p>
+					</div>
+					<div class="p-6 rounded-xl border border-stealth bg-graphite/30">
+						<div class="text-xs font-bold text-white uppercase mb-2">System Analysis</div>
+						<p class="text-[10px] text-zinc-500 leading-relaxed">Deep dives into protocol design, kernel internals, and distributed architectures.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="relative group lg:sticky lg:top-32">
+				<div class="absolute -inset-1 bg-gradient-to-r from-accent-purple to-accent-cyan rounded-2xl blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
+				<div class="relative rounded-2xl bg-graphite border border-stealth overflow-hidden p-8 font-mono text-[10px] text-zinc-500 leading-relaxed">
+					<div class="flex items-center justify-between mb-4 border-b border-stealth pb-2">
+						<span class="text-white font-bold">KHAOS_MANIFESTO.LOG</span>
+						<div class="flex gap-1">
+							<div class="w-2 h-2 rounded-full bg-red-500/20"></div>
+							<div class="w-2 h-2 rounded-full bg-yellow-500/20"></div>
+							<div class="w-2 h-2 rounded-full bg-green-500/20"></div>
+						</div>
+					</div>
+					<div class="space-y-2">
+						<p>> INITIALIZING_PROTOCOL...</p>
+						<p>> We don't just participate. We dissect.</p>
+						<p>> The goal is not just the flag, but the understanding of why the flag exists.</p>
+						<p>> Code is law, but every law has an exception.</p>
+						<p>> WE ARE THE EXCEPTION.</p>
+						<p class="pt-4 text-accent-purple tracking-widest">[SYSTEM_STATUS: ACTIVE]</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</Layout>

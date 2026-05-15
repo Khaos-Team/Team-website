@@ -1,0 +1,23 @@
+---
+import { cn } from './Button.astro';
+
+interface Props {
+	class?: string;
+	glow?: boolean;
+}
+
+const { class: className, glow = false } = Astro.props;
+---
+
+<div class={cn(
+	'group relative rounded-xl border border-stealth bg-graphite/50 p-6 transition-all hover:border-zinc-700 hover:bg-graphite/80',
+	glow && 'hover:shadow-[0_0_30px_rgba(168,85,247,0.05)]',
+	className
+)}>
+	{glow && (
+		<div class="absolute -inset-px rounded-xl bg-gradient-to-br from-accent-purple/10 to-transparent opacity-0 transition-opacity group-hover:opacity-100 pointer-events-none" />
+	)}
+	<div class="relative z-10">
+		<slot />
+	</div>
+</div>

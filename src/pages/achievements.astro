@@ -1,0 +1,135 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Trophy, Users, Shield, Zap, Award, Star, Activity, Crown } from 'lucide-vue-next';
+import { members } from '../utils/teamData';
+import { achievementStats, hallOfFame, missionLogs, upcomingOperations } from '../utils/achievementData';
+
+const stats = [
+	...achievementStats,
+	{ label: 'Elite Operatives', value: members.length.toString(), icon: Users, trend: 'Vetted', color: 'text-accent-cyan' },
+];
+---
+
+<Layout title="Achievements">
+	<div class="max-w-7xl mx-auto px-4 py-12 md:py-20">
+		<header class="mb-16 relative">
+			<div class="absolute -left-4 top-0 w-1 h-full bg-accent-purple opacity-50"></div>
+			<h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4 uppercase italic">Mission Reports</h1>
+			<p class="text-zinc-500 font-mono text-sm md:text-base uppercase tracking-widest">Technical archive of confirmed system compromises and tactical victories.</p>
+		</header>
+
+		<!-- Tactical Stats Grid -->
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
+			{stats.map(stat => (
+				<div class="group relative p-6 rounded-xl border border-stealth bg-graphite/50 overflow-hidden hover:border-white/20 transition-all">
+					<div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+					<div class="relative z-10">
+						<div class="flex items-center justify-between mb-4">
+							<stat.icon class={`w-5 h-5 ${stat.color}`} />
+							<span class="text-[10px] font-mono font-bold text-zinc-600 uppercase tracking-tighter">{stat.trend}</span>
+						</div>
+						<div class="text-3xl font-black tracking-tighter text-white mb-1">{stat.value}</div>
+						<div class="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">{stat.label}</div>
+					</div>
+					<!-- Scanning line effect -->
+					<div class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-accent-purple/50 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+				</div>
+			))}
+		</div>
+
+		<!-- Hall of Fame -->
+		<section class="mb-32">
+			<h2 class="text-2xl font-black tracking-tighter mb-12 uppercase flex items-center gap-3">
+				<Award class="w-6 h-6 text-yellow-500" />
+				Distinguished Operations
+			</h2>
+			{hallOfFame.length > 0 ? (
+				<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+					{hallOfFame.map(item => (
+						<div class={`relative p-8 rounded-2xl border border-stealth bg-gradient-to-br ${item.color} backdrop-blur-sm group`}>
+							<div class="absolute top-4 right-8 text-6xl font-black text-white/5 italic select-none">#{item.rank}</div>
+							<item.icon class="w-10 h-10 text-white mb-6 transform group-hover:scale-110 transition-transform" />
+							<div class="text-xs font-mono text-accent-purple mb-2">{item.year}</div>
+							<h3 class="text-2xl font-black text-white mb-2 uppercase italic tracking-tighter">{item.name}</h3>
+							<div class="text-sm font-bold text-yellow-500 uppercase tracking-widest mb-4">{item.award}</div>
+							<p class="text-sm text-zinc-400 leading-relaxed mb-8">{item.description}</p>
+							<div class="h-1 w-12 bg-white/20 rounded-full group-hover:w-full transition-all duration-500"></div>
+						</div>
+					))}
+				</div>
+			) : (
+				<div class="p-12 rounded-2xl border border-dashed border-stealth text-center">
+					<div class="inline-flex p-4 rounded-full bg-white/5 mb-6">
+						<Shield class="w-8 h-8 text-zinc-700" />
+					</div>
+					<h3 class="text-xl font-bold text-zinc-400 mb-2">No Confirmed Victories</h3>
+					<p class="text-sm text-zinc-600 max-w-sm mx-auto">The collective is currently in the vetting and preparation phase.</p>
+				</div>
+			)}
+		</section>
+
+		<!-- Mission Log - Detailed List -->
+		<section>
+			<h2 class="text-2xl font-black tracking-tighter mb-8 uppercase flex items-center gap-3">
+				<Activity class="w-6 h-6 text-accent-cyan" />
+				Mission Logs
+			</h2>
+			<div class="rounded-2xl border border-stealth bg-graphite/30 overflow-hidden font-mono mb-12">
+				<div class="grid grid-cols-4 bg-zinc-900/80 p-4 border-b border-stealth text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
+					<div>Timestamp</div>
+					<div>Operation</div>
+					<div>Result</div>
+					<div class="text-right">Status</div>
+				</div>
+				<div class="divide-y divide-stealth">
+					{missionLogs.length > 0 ? missionLogs.map(log => (
+						<div class="grid grid-cols-4 p-4 hover:bg-white/5 transition-colors text-[11px] items-center">
+							<div class="text-zinc-500">{log.date}</div>
+							<div class="text-white font-bold uppercase">{log.op}</div>
+							<div class="text-accent-cyan">{log.result}</div>
+							<div class="text-right">
+								<span class="px-2 py-0.5 rounded bg-green-500/10 text-green-500 text-[9px] font-bold border border-green-500/20">
+									{log.status}
+								</span>
+							</div>
+						</div>
+					)) : (
+						<div class="p-8 text-center text-[10px] text-zinc-600 uppercase tracking-widest">
+							No historical logs found
+						</div>
+					)}
+				</div>
+			</div>
+
+			<h3 class="text-xl font-black tracking-tighter mb-8 uppercase flex items-center gap-3">
+				<Activity class="w-6 h-6 text-accent-purple" />
+				Upcoming Operations
+			</h3>
+			<div class="rounded-2xl border border-stealth bg-graphite/30 overflow-hidden font-mono">
+				<div class="grid grid-cols-4 bg-zinc-900/80 p-4 border-b border-stealth text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
+					<div>Target Date</div>
+					<div>Operation</div>
+					<div>Objective</div>
+					<div class="text-right">Status</div>
+				</div>
+				<div class="divide-y divide-stealth">
+					{upcomingOperations.map(log => (
+						<div class="grid grid-cols-4 p-4 hover:bg-white/5 transition-colors text-[11px] items-center">
+							<div class="text-zinc-500">{log.date}</div>
+							<div class="text-white font-bold uppercase">{log.op}</div>
+							<div class="text-accent-cyan">{log.objective}</div>
+							<div class="text-right">
+								<span class="px-2 py-0.5 rounded bg-accent-purple/10 text-accent-purple text-[9px] font-bold border border-accent-purple/20">
+									{log.status}
+								</span>
+							</div>
+						</div>
+					))}
+					<div class="p-8 text-center text-[10px] text-zinc-600 uppercase tracking-widest">
+						End of Transmission
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</Layout>

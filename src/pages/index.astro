@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import Terminal from '../components/Terminal.vue';
+import { ChevronRight, Shield, Target, Trophy } from 'lucide-vue-next';
+---
+
+<Layout title="KHAOS CTF TEAM.">
+	<div class="relative overflow-hidden">
+		<!-- Hero Section -->
+		<section class="max-w-7xl mx-auto px-4 pt-32 md:pt-48 pb-20 md:pb-32 flex flex-col items-center text-center relative z-10">
+			
+			<h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-6 bg-gradient-to-b from-white to-zinc-500 bg-clip-text text-transparent px-4">
+				We just don't bring chaos -<br class="hidden md:block"/>We are the <span class="bg-gradient-to-r from-white via-accent-purple to-white bg-[length:200%_100%] animate-shimmer bg-clip-text">KHAOS</span>.
+			</h1>
+			
+			<div class="mb-12 font-mono text-[10px] md:text-sm text-zinc-500 flex flex-col items-center gap-1 animate-fade-in px-6">
+				<span class="text-accent-purple">[SYSTEM_ID: KHAOS_PROTOCOL_INITIATED]</span>
+				<span class="max-w-md italic uppercase tracking-tighter">Elite Capture The Flag (CTF) Team. Vulnerability research and system exploitation. We are coming to win.</span>
+			</div>
+			
+			<div class="flex flex-col sm:flex-row justify-center gap-4 mb-20 w-full sm:w-auto px-6">
+				<Button variant="primary" size="lg" href="/join" class="w-full sm:w-auto">
+					Join Team
+					<ChevronRight class="ml-2 w-4 h-4" />
+				</Button>
+				<Button variant="outline" size="lg" href="/writeups" class="w-full sm:w-auto">
+					Read Writeups
+				</Button>
+				<Button variant="ghost" size="lg" href="/achievements" class="w-full sm:w-auto">
+					Our Victories
+				</Button>
+			</div>
+
+			<div class="w-full flex justify-center perspective-1000 px-4 overflow-hidden">
+				<Terminal client:load class="transform transition-transform hover:rotate-x-1 scale-75 md:scale-100" />
+			</div>
+		</section>
+
+		<!-- Features Grid -->
+		<section class="max-w-7xl mx-auto px-4 py-32 border-t border-stealth">
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+				<div class="space-y-4">
+					<div class="w-12 h-12 rounded-lg bg-zinc-900 border border-stealth flex items-center justify-center">
+						<Target class="w-6 h-6 text-accent-cyan" />
+					</div>
+					<h3 class="text-xl font-bold">Precision Execution</h3>
+					<p class="text-zinc-500 text-sm leading-relaxed">
+						Our members are specialists in their domains, ensuring every challenge is approached with surgical precision and depth.
+					</p>
+				</div>
+				<div class="space-y-4">
+					<div class="w-12 h-12 rounded-lg bg-zinc-900 border border-stealth flex items-center justify-center">
+						<Shield class="w-6 h-6 text-accent-purple" />
+					</div>
+					<h3 class="text-xl font-bold">Defensive Excellence</h3>
+					<p class="text-zinc-500 text-sm leading-relaxed">
+						Understanding the offensive mindset is key to defense. We contribute back to the security community through vulnerability research.
+					</p>
+				</div>
+				<div class="space-y-4">
+					<div class="w-12 h-12 rounded-lg bg-zinc-900 border border-stealth flex items-center justify-center">
+						<Trophy class="w-6 h-6 text-white" />
+					</div>
+					<h3 class="text-xl font-bold">Global Dominance</h3>
+					<p class="text-zinc-500 text-sm leading-relaxed">
+						Consistently ranked among the top CTF teams globally. We don't just participate; we compete to win.
+					</p>
+				</div>
+			</div>
+		</section>
+	</div>
+</Layout>
+
+<style>
+	.perspective-1000 {
+		perspective: 1000px;
+	}
+	
+	@keyframes fade-in {
+		from { opacity: 0; transform: translateY(10px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+	
+	.animate-fade-in {
+		animation: fade-in 0.8s ease-out forwards;
+	}
+</style>

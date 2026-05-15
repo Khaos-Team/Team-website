@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import Card from '../components/Card.astro';
+import { Send, MessageSquare, Target, Code } from 'lucide-vue-next';
+---
+
+<Layout title="Join the Collective">
+	<div class="max-w-7xl mx-auto px-4 py-20">
+		<header class="mb-20 text-center">
+			<h1 class="text-5xl font-black tracking-tighter mb-4 uppercase">Recruitment</h1>
+			<p class="text-zinc-500 max-w-xl mx-auto">We are looking for specialists. Not just players.</p>
+		</header>
+
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+			<!-- Application Info -->
+			<div class="space-y-12">
+				<div>
+					<h2 class="text-2xl font-black tracking-tighter mb-6 flex items-center gap-3">
+						<Target class="w-6 h-6 text-accent-purple" />
+						Skill Expectations
+					</h2>
+					<div class="space-y-4">
+						<Card>
+							<h4 class="font-bold text-white mb-2">Web Security</h4>
+							<p class="text-xs text-zinc-500 leading-relaxed">Deep understanding of SSRF, Deserialization, and complex Auth bypasses. Proficiency in Node.js, Go, or Python.</p>
+						</Card>
+						<Card>
+							<h4 class="font-bold text-white mb-2">Binary Exploitation</h4>
+							<p class="text-xs text-zinc-500 leading-relaxed">Experience with Heap exploitation, ROP chains, and Kernel-level vulnerabilities. Knowledge of x64 and ARM.</p>
+						</Card>
+						<Card>
+							<h4 class="font-bold text-white mb-2">Cryptography</h4>
+							<p class="text-xs text-zinc-500 leading-relaxed">Strong foundation in number theory, RSA, ECC, and side-channel attacks. Ability to script complex attacks.</p>
+						</Card>
+						<Card>
+							<h4 class="font-bold text-white mb-2">Cloud & Infrastructure</h4>
+							<p class="text-xs text-zinc-500 leading-relaxed">Attacking AWS/GCP/Azure environments, Kubernetes escapes, IAM misconfigurations, and CI/CD pipeline exploitation.</p>
+						</Card>
+						<Card>
+							<h4 class="font-bold text-white mb-2">Mobile & Hardware</h4>
+							<p class="text-xs text-zinc-500 leading-relaxed">iOS/Android application reversing, certificate pinning bypass, SDR, and IoT firmware analysis.</p>
+						</Card>
+						<Card>
+							<h4 class="font-bold text-white mb-2">OSINT & Forensics</h4>
+							<p class="text-xs text-zinc-500 leading-relaxed">Advanced data gathering, geolocation, memory forensics, disk analysis, and malware triage.</p>
+						</Card>
+						<Card>
+							<h4 class="font-bold text-white mb-2">AI & Machine Learning</h4>
+							<p class="text-xs text-zinc-500 leading-relaxed">Prompt injection, model inversion, training data poisoning, and adversarial machine learning techniques.</p>
+						</Card>
+					</div>
+				</div>
+			</div>
+
+			<!-- Application Form -->
+			<Card class="p-8 flex flex-col items-center justify-center text-center">
+				<div class="w-16 h-16 rounded-full bg-white/5 border border-stealth flex items-center justify-center mb-6">
+					<Code class="w-8 h-8 text-accent-cyan" />
+				</div>
+				<h2 class="text-2xl font-black tracking-tighter mb-4">Ready to Begin?</h2>
+				<p class="text-zinc-500 mb-8 max-w-sm">
+					Our recruitment process is managed through a secure portal. Complete the application form to initiate the vetting process.
+				</p>
+				<Button 
+					href="https://forms.gle/qGwdCLBfnWv2cd6X8" 
+					variant="primary" 
+					size="lg" 
+					class="w-full"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Open Application Form
+					<Send class="w-4 h-4 ml-2" />
+				</Button>
+				<p class="mt-6 text-[10px] text-zinc-600 uppercase tracking-widest font-mono">
+					Security Clearance Level 1 Required
+				</p>
+			</Card>
+		</div>
+	</div>
+</Layout>

@@ -1,0 +1,79 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Card from '../../components/Card.astro';
+import { Calendar, User, ExternalLink } from 'lucide-vue-next';
+
+const writeups = await getCollection('writeups');
+const sortedWriteups = writeups.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const categories = ['All', 'Web', 'Pwn', 'Crypto', 'OSINT', 'Reverse Engineering', 'Forensics'];
+---
+
+<Layout title="Writeups">
+	<div class="max-w-7xl mx-auto px-4 py-12 md:py-20">
+		<header class="mb-12 md:mb-16 px-2">
+			<h1 class="text-3xl md:text-4xl font-black tracking-tighter mb-4">Technical Archive</h1>
+			<p class="text-zinc-500 text-sm md:text-base">Deep dives into vulnerabilities, exploits, and CTF challenges.</p>
+		</header>
+
+		<!-- Categories -->
+		<div class="flex flex-wrap gap-2 mb-8 md:mb-12 px-2">
+			{categories.map((cat) => (
+				<button class="px-3 md:px-4 py-1.5 rounded-full border border-stealth text-[10px] md:text-xs font-bold hover:border-zinc-700 hover:bg-white/5 transition-all">
+					{cat}
+				</button>
+			))}
+		</div>
+
+		<!-- Grid -->
+		<div class="grid grid-cols-1 sm:md:grid-cols-2 lg:grid-cols-3 gap-6 px-2">
+			{sortedWriteups.map((post) => {
+				const isExternal = !!post.data.externalUrl;
+				const href = isExternal ? post.data.externalUrl : `/writeups/${post.id}`;
+				const target = isExternal ? "_blank" : "_self";
+				
+				return (
+					<a href={href} target={target} rel={isExternal ? "noopener noreferrer" : ""}>
+						<Card glow class="h-full flex flex-col p-0 overflow-hidden">
+							{post.data.image && (
+								<div class="relative w-full aspect-video overflow-hidden border-b border-stealth">
+									<img 
+										src={post.data.image} 
+										alt={post.data.title} 
+										class="object-cover w-full h-full filter grayscale hover:grayscale-0 transition-all duration-500"
+									/>
+									<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent pointer-events-none"></div>
+								</div>
+							)}
+							<div class="p-5 flex flex-col flex-grow">
+								<div class="flex justify-between items-start mb-4">
+									<span class="px-2 py-0.5 rounded-md bg-accent-purple/10 text-accent-purple text-[10px] font-bold uppercase tracking-wider">
+										{post.data.category}
+									</span>
+									{isExternal && <ExternalLink class="w-3.5 h-3.5 text-zinc-600" />}
+								</div>
+								<h3 class="text-xl font-bold mb-3 group-hover:text-white transition-colors">
+									{post.data.title}
+								</h3>
+								<p class="text-sm text-zinc-500 line-clamp-2 mb-6 flex-grow">
+									{post.data.description}
+								</p>
+								<div class="flex items-center justify-between text-[10px] text-zinc-600 font-mono uppercase tracking-widest">
+									<div class="flex items-center gap-1">
+										<Calendar class="w-3 h-3" />
+										{post.data.pubDate.toLocaleDateString()}
+									</div>
+									<div class="flex items-center gap-1">
+										<User class="w-3 h-3" />
+										{post.data.author}
+									</div>
+								</div>
+							</div>
+						</Card>
+					</a>
+				);
+			})}
+		</div>
+	</div>
+</Layout>

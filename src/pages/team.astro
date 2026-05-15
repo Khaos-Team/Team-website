@@ -1,0 +1,201 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import { 
+	Shield, Zap, Github, Twitter as TwitterIcon, 
+	Link as LinkIcon, Globe, MessageSquare,
+	Skull, Cpu, Ghost, Target, Terminal as TerminalIcon
+} from 'lucide-vue-next';
+import { members } from '../utils/teamData';
+
+const getSocialIcon = (platform: string) => {
+	switch (platform.toLowerCase()) {
+		case 'github': return Github;
+		case 'twitter':
+		case 'x': return TwitterIcon;
+		case 'discord': return MessageSquare;
+		case 'linktree': return Globe;
+		case 'guns':
+		case 'guns.lol': return Shield;
+		default: return LinkIcon;
+	}
+};
+
+const getAvatarIcon = (iconName: string) => {
+	switch (iconName.toLowerCase()) {
+		case 'skull': return Skull;
+		case 'shield': return Shield;
+		case 'cpu': return Cpu;
+		case 'ghost': return Ghost;
+		case 'target': return Target;
+		case 'terminal': return TerminalIcon;
+		default: return Skull;
+	}
+};
+---
+
+<Layout title="Team">
+	<div class="max-w-7xl mx-auto px-4 py-20">
+		<header class="mb-12 md:mb-20 text-center px-4">
+			<h1 class="text-4xl md:text-5xl font-black tracking-tighter mb-4 uppercase">The Collective</h1>
+			<p class="text-zinc-500 max-w-xl mx-auto text-sm md:text-base">Meet the specialists behind Khaos. A distributed group of researchers and competitors.</p>
+		</header>
+
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-20 md:mb-32 px-4">
+			{members.map(member => {
+				const AvatarIcon = member.image.startsWith('icon:') 
+					? getAvatarIcon(member.image.split(':')[1]) 
+					: null;
+				
+				return (
+					<Card glow class="flex flex-col p-3">
+						<div class="relative w-full aspect-square mb-3 rounded-lg overflow-hidden border border-stealth group glitch-hover bg-zinc-900/50 flex items-center justify-center">
+							{AvatarIcon ? (
+								<AvatarIcon 
+									class="w-1/2 h-1/2 text-white filter grayscale group-hover:grayscale-0 transition-all duration-500 z-20 neon-glow" 
+								/>
+							) : (
+								<img 
+									src={member.image} 
+									alt={member.name} 
+									class="object-cover w-full h-full filter grayscale group-hover:grayscale-0 transition-all duration-500 neon-glow" 
+								/>
+							)}
+							<div class="absolute inset-0 scanline-overlay"></div>
+							<div class="absolute inset-0 noise-overlay"></div>
+							<div class="scan-line"></div>
+						</div>
+						<div class="flex flex-col flex-grow text-center">
+						<div class="mb-3">
+							<h3 class="font-bold text-white text-base leading-tight mb-1">{member.name}</h3>
+							<span class="text-[10px] text-accent-purple uppercase tracking-[0.2em] font-mono font-bold block">{member.role}</span>
+						</div>
+						
+						<p class="text-[11px] text-zinc-400 mb-4 line-clamp-2">
+							{member.bio}
+						</p>
+
+						<div class="flex flex-wrap justify-center gap-1.5 mb-4">
+							{member.skills.map(skill => (
+								<span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[9px] text-white font-mono font-bold uppercase tracking-wider">
+									{skill}
+								</span>
+							))}
+						</div>
+
+						<div class="flex items-center justify-center gap-3 mt-auto pt-3 border-t border-stealth">
+							{member.socials.map(social => {
+								const SocialIcon = getSocialIcon(social.platform);
+								return (
+									<a 
+										href={social.url} 
+										target="_blank" 
+										rel="noopener noreferrer" 
+										class="text-zinc-500 hover:text-white transition-colors p-0.5"
+										title={social.platform}
+									>
+										<SocialIcon class="w-3.5 h-3.5" />
+									</a>
+								);
+							})}
+						</div>
+					</div>
+				</Card>
+				);
+			})}
+		</div>
+
+		<section class="mb-20 py-20 border-t border-stealth">
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+				<div>
+					<h2 class="text-3xl font-black tracking-tighter mb-6">Want to join us?</h2>
+					<p class="text-zinc-500 mb-8 leading-relaxed">
+						We are always looking for exceptional talent in Web, Pwn, Crypto, and Forensics. If you think you have what it takes to contribute to the collective, check out our recruitment page.
+					</p>
+					<div class="flex gap-4">
+						<a href="/join" class="px-6 py-2 rounded-full bg-accent-purple text-white text-sm font-bold hover:bg-purple-600 transition-colors">
+							View Requirements
+						</a>
+					</div>
+				</div>
+				<div class="grid grid-cols-2 gap-4">
+					<div class="p-6 rounded-2xl border border-stealth bg-graphite/50">
+						<Shield class="w-8 h-8 text-accent-cyan mb-4" />
+						<h4 class="font-bold text-white mb-1">Elite Only</h4>
+						<p class="text-[10px] text-zinc-500 uppercase tracking-widest">Strict selection process</p>
+					</div>
+					<div class="p-6 rounded-2xl border border-stealth bg-graphite/50">
+						<Zap class="w-8 h-8 text-accent-purple mb-4" />
+						<h4 class="font-bold text-white mb-1">Fast Growth</h4>
+						<p class="text-[10px] text-zinc-500 uppercase tracking-widest">Global competition</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</Layout>
+
+<style is:global>
+  .scanline-overlay {
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.1),
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .noise-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .glitch-hover:hover img {
+    animation: glitch 0.2s infinite;
+  }
+
+  @keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+  }
+
+  .scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(168, 85, 247, 0.5); /* accent-purple */
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
+    animation: scan 3s linear infinite;
+    opacity: 0;
+    z-index: 15;
+  }
+
+  .group:hover .scan-line {
+    opacity: 1;
+  }
+
+  @keyframes scan {
+    0% { top: 0; }
+    100% { top: 100%; }
+  }
+
+  .neon-glow {
+    filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.5));
+  }
+
+  .group:hover .neon-glow {
+    filter: drop-shadow(0 0 15px rgba(168, 85, 247, 1));
+    color: #a855f7;
+  }
+</style>

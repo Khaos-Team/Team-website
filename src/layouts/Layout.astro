@@ -1,0 +1,68 @@
+---
+import '@fontsource/geist-sans';
+import '@fontsource/geist-mono';
+import '../styles/globals.css';
+import CommandPalette from '../components/CommandPalette.vue';
+import MobileNav from '../components/MobileNav.vue';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Khaos - Elite CTF Team. Break. Reverse. Dominate." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/png" href="/images/logo.png" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | Khaos</title>
+	</head>
+	<body class="min-h-screen relative">
+		<CommandPalette client:load />
+		<div class="noise-overlay"></div>
+		<div class="tactical-grid fixed inset-0 pointer-events-none"></div>
+		
+		<header class="fixed top-0 left-0 right-0 z-40 border-b border-stealth bg-background/80 backdrop-blur-md">
+			<nav class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+				<a href="/" class="flex items-center gap-2 group">
+					<img src="/images/logo.png" alt="Khaos Logo" class="w-8 h-8 object-contain transition-transform group-hover:rotate-12" />
+					<span class="text-xl font-bold tracking-tighter text-white group-hover:text-accent-purple transition-colors">KHAOS</span>
+				</a>
+				
+				<div class="hidden md:flex items-center gap-8">
+					<a href="/about" class="text-sm font-medium hover:text-white transition-colors">About</a>
+					<a href="/writeups" class="text-sm font-medium hover:text-white transition-colors">Writeups</a>
+					<a href="/events" class="text-sm font-medium hover:text-white transition-colors">Events</a>
+					<a href="/achievements" class="text-sm font-medium hover:text-white transition-colors">Achievements</a>
+					<a href="/team" class="text-sm font-medium hover:text-white transition-colors">Team</a>
+					<a href="/join" class="px-4 py-1.5 rounded-full bg-white text-black text-sm font-bold hover:bg-zinc-200 transition-colors">Join</a>
+				</div>
+
+				<MobileNav client:load />
+			</nav>
+		</header>
+
+		<main class="relative z-10 pt-16">
+			<slot />
+		</main>
+
+		<footer class="relative z-10 border-t border-stealth mt-20 py-12">
+			<div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+				<div class="flex items-center gap-2">
+					<span class="text-white font-bold tracking-tighter">KHAOS</span>
+					<span class="text-zinc-600 text-sm">© 2026</span>
+				</div>
+				<div class="flex gap-6 text-sm">
+					<a href="/about" class="hover:text-white transition-colors">About</a>
+					<a href="/rss.xml" class="hover:text-white transition-colors">RSS</a>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
