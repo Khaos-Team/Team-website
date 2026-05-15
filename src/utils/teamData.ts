@@ -21,7 +21,7 @@ export const members = [
 			{ platform: 'linktree', url: 'https://linktr.ee/void' }
 		],
 		image: '/images/avatars/0xc4rc3l-avatar.jpg',
-		skills: ['Pwn', 'Reverse Engineering', 'Web', 'Active Directory','Red team ops','C2 ops']
+		skills: ['Pwn', 'Reverse Engineering', 'Web', 'Active Directory','AV evasion','Red team ops','C2 ops']
 	},
 	{
 		name: 'Cipher',
