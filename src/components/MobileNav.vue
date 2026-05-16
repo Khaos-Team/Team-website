@@ -8,14 +8,16 @@ const toggleMenu = () => {
   isOpen.value = !isOpen.value;
 };
 
-// Handle body scroll locking
+// Handle body scroll locking and background blur
 watch(isOpen, (newValue) => {
   if (newValue) {
     document.body.style.overflow = 'hidden';
     document.body.style.touchAction = 'none';
+    document.getElementById('main-content')?.classList.add('mobile-menu-blur');
   } else {
     document.body.style.overflow = '';
     document.body.style.touchAction = '';
+    document.getElementById('main-content')?.classList.remove('mobile-menu-blur');
   }
 });
 
@@ -60,9 +62,9 @@ onUnmounted(() => {
       leave-from-class="opacity-100 translate-x-0"
       leave-to-class="opacity-0 translate-x-full"
     >
-      <div v-if="isOpen" class="fixed inset-0 z-50 bg-background/98 backdrop-blur-2xl flex flex-col">
+      <div v-if="isOpen" class="fixed inset-y-0 right-0 w-[85%] max-w-[400px] z-50 bg-background/98 backdrop-blur-2xl flex flex-col shadow-tactical">
         <!-- Close area (tapping outside items closes menu) -->
-        <div class="absolute inset-0 z-[-1]" @click="closeMenu"></div>
+        <div class="fixed inset-0 z-[-1] bg-black/20" @click="closeMenu"></div>
 
         <div class="flex-grow flex flex-col justify-center px-8 space-y-6 pt-16">
           <div v-for="(item, index) in navItems" :key="item.name" 
