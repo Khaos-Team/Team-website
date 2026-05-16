@@ -12,16 +12,16 @@ export const members = [
 		skills: ['OSINT', 'Forensics', 'Pwn', 'Crypto']
 	},
 	{
-		name: '0xc4rcel',
+		name: '0xc4rc3l',
 		role: 'Co-founder',
 		bio: 'Kernel exploitation enthusiast. Loves heap grooming and browser exploitation.',
 		socials: [
-			{ platform: 'github', url: 'https://github.com/void' },
-			{ platform: 'twitter', url: 'https://twitter.com/void' },
+			{ platform: 'github', url: 'https://github.com/0xc4rc3l' },
+			{ platform: 'twitter', url: 'https://twitter.com/0x3v4siv3' },
 			{ platform: 'linktree', url: 'https://linktr.ee/void' }
 		],
-		image: '/images/avatars/oxcarcel-avator.png',
-		skills: ['Pwn', 'Reverse Engineering', 'Web']
+		image: '/images/avatars/0xc4rc3l-avatar.jpg',
+		skills: ['Pwn', 'Reverse Engineering', 'Web', 'Active Directory','AV evasion','Red team ops','C2 ops']
 	},
 	{
 		name: 'Cipher',
