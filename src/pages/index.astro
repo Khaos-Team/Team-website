@@ -8,61 +8,65 @@ import { ChevronRight, Shield, Target, Trophy } from 'lucide-vue-next';
 <Layout title="KHAOS CTF TEAM.">
 	<div class="relative overflow-hidden">
 		<!-- Hero Section -->
-		<section class="max-w-7xl mx-auto px-4 pt-32 md:pt-48 pb-20 md:pb-32 flex flex-col items-center text-center relative z-10">
+		<section class="max-w-7xl mx-auto px-4 pt-24 md:pt-48 pb-20 md:pb-32 flex flex-col items-center text-center relative z-10">
 			
-			<h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-6 bg-gradient-to-b from-white to-zinc-500 bg-clip-text text-transparent px-4">
-				We just don't bring chaos -<br class="hidden md:block"/>We are the <span class="bg-gradient-to-r from-white via-accent-purple to-white bg-[length:200%_100%] animate-shimmer bg-clip-text">KHAOS</span>.
+			<h1 class="text-3xl sm:text-4xl md:text-6xl font-black tracking-tighter mb-6 bg-gradient-to-b from-white to-zinc-500 bg-clip-text text-transparent px-2 sm:px-4 leading-[1.1]">
+				We just don't bring chaos -<br class="hidden sm:block"/>We are the <span class="bg-gradient-to-r from-white via-accent-purple to-white bg-[length:200%_100%] animate-shimmer bg-clip-text">KHAOS</span>.
 			</h1>
 			
-			<div class="mb-12 font-mono text-[10px] md:text-sm text-zinc-500 flex flex-col items-center gap-1 animate-fade-in px-6">
-				<span class="text-accent-purple">[SYSTEM_ID: KHAOS_PROTOCOL_INITIATED]</span>
-				<span class="max-w-md italic uppercase tracking-tighter">Elite Capture The Flag (CTF) Team. Vulnerability research and system exploitation. We are coming to win.</span>
+			<div class="mb-10 md:mb-12 font-mono text-[10px] md:text-sm text-zinc-500 flex flex-col items-center gap-1.5 animate-fade-in px-4">
+				<span class="text-accent-purple font-bold tracking-[0.2em]">[SYSTEM_ID: KHAOS_PROTOCOL_INITIATED]</span>
+				<span class="max-w-md italic uppercase tracking-tighter leading-relaxed">Elite Capture The Flag (CTF) Team. Vulnerability research and system exploitation. We are coming to win.</span>
 			</div>
 			
-			<div class="flex flex-col sm:flex-row justify-center gap-4 mb-20 w-full sm:w-auto px-6">
-				<Button variant="primary" size="lg" href="/join" class="w-full sm:w-auto">
+			<div class="flex flex-col sm:flex-row justify-center gap-4 mb-16 md:mb-20 w-full sm:w-auto px-4 max-w-sm sm:max-w-none">
+				<Button variant="primary" size="lg" href="/join" class="w-full sm:w-auto min-h-[48px]">
 					Join Team
 					<ChevronRight class="ml-2 w-4 h-4" />
 				</Button>
-				<Button variant="outline" size="lg" href="/writeups" class="w-full sm:w-auto">
+				<Button variant="outline" size="lg" href="/writeups" class="w-full sm:w-auto min-h-[48px]">
 					Read Writeups
 				</Button>
-				<Button variant="ghost" size="lg" href="/achievements" class="w-full sm:w-auto">
+				<Button variant="ghost" size="lg" href="/achievements" class="w-full sm:w-auto min-h-[48px]">
 					Our Victories
 				</Button>
 			</div>
 
-			<div class="w-full flex justify-center perspective-1000 px-4 overflow-hidden">
-				<Terminal client:load class="transform transition-transform hover:rotate-x-1 scale-75 md:scale-100" />
+			<div class="w-full flex justify-center perspective-1000 px-4 overflow-visible">
+				<div class="relative w-full max-w-2xl group">
+					<!-- Glow effect for mobile -->
+					<div class="absolute -inset-4 bg-accent-purple/5 blur-3xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+					<Terminal client:load class="transform transition-all duration-700 hover:rotate-x-2 scale-[0.85] sm:scale-90 md:scale-100" />
+				</div>
 			</div>
 		</section>
 
 		<!-- Features Grid -->
-		<section class="max-w-7xl mx-auto px-4 py-32 border-t border-stealth">
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-				<div class="space-y-4">
-					<div class="w-12 h-12 rounded-lg bg-zinc-900 border border-stealth flex items-center justify-center">
+		<section class="max-w-7xl mx-auto px-4 py-20 md:py-32 border-t border-stealth">
+			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
+				<div class="space-y-4 group">
+					<div class="w-12 h-12 rounded-xl bg-zinc-900 border border-stealth flex items-center justify-center group-hover:border-accent-cyan/50 transition-colors shadow-lg shadow-black">
 						<Target class="w-6 h-6 text-accent-cyan" />
 					</div>
-					<h3 class="text-xl font-bold">Precision Execution</h3>
+					<h3 class="text-xl font-bold text-white">Precision Execution</h3>
 					<p class="text-zinc-500 text-sm leading-relaxed">
 						Our members are specialists in their domains, ensuring every challenge is approached with surgical precision and depth.
 					</p>
 				</div>
-				<div class="space-y-4">
-					<div class="w-12 h-12 rounded-lg bg-zinc-900 border border-stealth flex items-center justify-center">
+				<div class="space-y-4 group">
+					<div class="w-12 h-12 rounded-xl bg-zinc-900 border border-stealth flex items-center justify-center group-hover:border-accent-purple/50 transition-colors shadow-lg shadow-black">
 						<Shield class="w-6 h-6 text-accent-purple" />
 					</div>
-					<h3 class="text-xl font-bold">Defensive Excellence</h3>
+					<h3 class="text-xl font-bold text-white">Defensive Excellence</h3>
 					<p class="text-zinc-500 text-sm leading-relaxed">
 						Understanding the offensive mindset is key to defense. We contribute back to the security community through vulnerability research.
 					</p>
 				</div>
-				<div class="space-y-4">
-					<div class="w-12 h-12 rounded-lg bg-zinc-900 border border-stealth flex items-center justify-center">
+				<div class="space-y-4 group sm:col-span-2 md:col-span-1">
+					<div class="w-12 h-12 rounded-xl bg-zinc-900 border border-stealth flex items-center justify-center group-hover:border-white/50 transition-colors shadow-lg shadow-black">
 						<Trophy class="w-6 h-6 text-white" />
 					</div>
-					<h3 class="text-xl font-bold">Global Dominance</h3>
+					<h3 class="text-xl font-bold text-white">Global Dominance</h3>
 					<p class="text-zinc-500 text-sm leading-relaxed">
 						Consistently ranked among the top CTF teams globally. We don't just participate; we compete to win.
 					</p>

@@ -20,13 +20,30 @@
 }
 
 @layer base {
+  html {
+    @apply scroll-smooth;
+    /* Prevent font size inflation in landscape on mobile */
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
     @apply bg-background text-zinc-400 font-sans selection:bg-accent-purple/30 selection:text-white;
     -webkit-font-smoothing: antialiased;
+    /* Fix for mobile momentum scrolling */
+    -webkit-overflow-scrolling: touch;
+    /* Ensure body doesn't overflow horizontally */
+    @apply overflow-x-hidden w-full;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply text-zinc-100 font-bold tracking-tight;
+  }
+}
+
+/* Typography Scale */
+@layer utilities {
+  .text-fluid-h1 {
+    font-size: clamp(2rem, 8vw + 1rem, 4rem);
   }
 }
 
@@ -35,7 +52,7 @@
   background-image: 
     linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background-size: clamp(24px, 5vw, 32px) clamp(24px, 5vw, 32px);
 }
 
 .noise-overlay {
@@ -47,27 +64,42 @@
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 8px;
+/* Scrollbar styling - Hidden on mobile for cleaner look */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-background);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #27272a; /* zinc-800 */
+    border-radius: 9999px;
+    border: 2px solid var(--color-background);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3f3f46; /* zinc-700 */
+  }
 }
 
 /* Shiki Codeblock Enhancements */
 pre {
   position: relative;
-  padding: 1.5rem !important;
-  margin: 2rem 0 !important;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  padding: 1.25rem !important;
+  margin: 1.5rem 0 !important;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
   overflow-x: auto;
   max-width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid #111111; /* stealth */
 }
 
 @media (max-width: 640px) {
   pre {
     padding: 1rem !important;
-    margin: 1.5rem 0 !important;
-    font-size: 0.75rem !important;
-    border-radius: 0.5rem !important;
+    margin: 1.25rem 0 !important;
+    font-size: 0.7rem !important;
+    line-height: 1.5;
   }
 }
 
@@ -77,6 +109,12 @@ pre {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  margin-bottom: 1rem;
+}
+
+/* Touch targets for links in prose */
+.prose a {
+  @apply inline-block py-0.5;
 }
 
 pre::before {
@@ -87,7 +125,7 @@ pre::before {
   right: 0;
   height: 2px;
   background: linear-gradient(90deg, var(--color-accent-purple), var(--color-accent-cyan));
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 code {
@@ -99,16 +137,13 @@ code {
   padding: 0 !important;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--color-background);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-zinc-800);
-  border-radius: 9999px;
-  border: 2px solid var(--color-background);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-zinc-700);
+/* Mobile optimizations for common elements */
+@layer components {
+  .mobile-padding {
+    @apply px-4 sm:px-6 md:px-8;
+  }
+  
+  .tap-target {
+    @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
+  }
 }

@@ -6,47 +6,70 @@ import { Send, MessageSquare, Target, Code } from 'lucide-vue-next';
 ---
 
 <Layout title="Join the Collective">
-	<div class="max-w-7xl mx-auto px-4 py-20">
-		<header class="mb-20 text-center">
-			<h1 class="text-5xl font-black tracking-tighter mb-4 uppercase">Recruitment</h1>
-			<p class="text-zinc-500 max-w-xl mx-auto">We are looking for specialists. Not just players.</p>
+	<div class="max-w-7xl mx-auto px-4 py-12 md:py-20">
+		<header class="mb-12 md:mb-20 text-center px-4">
+			<h1 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter mb-4 uppercase">Recruitment</h1>
+			<p class="text-zinc-500 max-w-xl mx-auto text-sm md:text-base">We are looking for specialists. Not just players.</p>
 		</header>
 
-		<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-start">
 			<!-- Application Info -->
-			<div class="space-y-12">
+			<div class="space-y-12 px-2">
 				<div>
-					<h2 class="text-2xl font-black tracking-tighter mb-6 flex items-center gap-3">
-						<Target class="w-6 h-6 text-accent-purple" />
+					<h2 class="text-2xl font-black tracking-tighter mb-8 flex items-center gap-3">
+						<div class="w-10 h-10 rounded-xl bg-accent-purple/10 flex items-center justify-center border border-accent-purple/20">
+							<Target class="w-5 h-5 text-accent-purple" />
+						</div>
 						Skill Expectations
 					</h2>
-					<div class="space-y-4">
-						<Card>
-							<h4 class="font-bold text-white mb-2">Web Security</h4>
+					<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+						<Card class="p-5 md:p-6 hover:border-accent-purple/30 transition-colors">
+							<h4 class="font-bold text-white mb-2 flex items-center gap-2">
+								<div class="w-1.5 h-1.5 rounded-full bg-accent-purple"></div>
+								Web Security
+							</h4>
 							<p class="text-xs text-zinc-500 leading-relaxed">Deep understanding of SSRF, Deserialization, and complex Auth bypasses. Proficiency in Node.js, Go, or Python.</p>
 						</Card>
-						<Card>
-							<h4 class="font-bold text-white mb-2">Binary Exploitation</h4>
+						<Card class="p-5 md:p-6 hover:border-accent-purple/30 transition-colors">
+							<h4 class="font-bold text-white mb-2 flex items-center gap-2">
+								<div class="w-1.5 h-1.5 rounded-full bg-accent-purple"></div>
+								Binary Exploitation
+							</h4>
 							<p class="text-xs text-zinc-500 leading-relaxed">Experience with Heap exploitation, ROP chains, and Kernel-level vulnerabilities. Knowledge of x64 and ARM.</p>
 						</Card>
-						<Card>
-							<h4 class="font-bold text-white mb-2">Cryptography</h4>
+						<Card class="p-5 md:p-6 hover:border-accent-purple/30 transition-colors">
+							<h4 class="font-bold text-white mb-2 flex items-center gap-2">
+								<div class="w-1.5 h-1.5 rounded-full bg-accent-purple"></div>
+								Cryptography
+							</h4>
 							<p class="text-xs text-zinc-500 leading-relaxed">Strong foundation in number theory, RSA, ECC, and side-channel attacks. Ability to script complex attacks.</p>
 						</Card>
-						<Card>
-							<h4 class="font-bold text-white mb-2">Cloud & Infrastructure</h4>
+						<Card class="p-5 md:p-6 hover:border-accent-purple/30 transition-colors">
+							<h4 class="font-bold text-white mb-2 flex items-center gap-2">
+								<div class="w-1.5 h-1.5 rounded-full bg-accent-purple"></div>
+								Cloud & Infrastructure
+							</h4>
 							<p class="text-xs text-zinc-500 leading-relaxed">Attacking AWS/GCP/Azure environments, Kubernetes escapes, IAM misconfigurations, and CI/CD pipeline exploitation.</p>
 						</Card>
-						<Card>
-							<h4 class="font-bold text-white mb-2">Mobile & Hardware</h4>
+						<Card class="p-5 md:p-6 hover:border-accent-purple/30 transition-colors">
+							<h4 class="font-bold text-white mb-2 flex items-center gap-2">
+								<div class="w-1.5 h-1.5 rounded-full bg-accent-purple"></div>
+								Mobile & Hardware
+							</h4>
 							<p class="text-xs text-zinc-500 leading-relaxed">iOS/Android application reversing, certificate pinning bypass, SDR, and IoT firmware analysis.</p>
 						</Card>
-						<Card>
-							<h4 class="font-bold text-white mb-2">OSINT & Forensics</h4>
+						<Card class="p-5 md:p-6 hover:border-accent-purple/30 transition-colors">
+							<h4 class="font-bold text-white mb-2 flex items-center gap-2">
+								<div class="w-1.5 h-1.5 rounded-full bg-accent-purple"></div>
+								OSINT & Forensics
+							</h4>
 							<p class="text-xs text-zinc-500 leading-relaxed">Advanced data gathering, geolocation, memory forensics, disk analysis, and malware triage.</p>
 						</Card>
-						<Card>
-							<h4 class="font-bold text-white mb-2">AI & Machine Learning</h4>
+						<Card class="p-5 md:p-6 hover:border-accent-purple/30 transition-colors">
+							<h4 class="font-bold text-white mb-2 flex items-center gap-2">
+								<div class="w-1.5 h-1.5 rounded-full bg-accent-purple"></div>
+								AI & Machine Learning
+							</h4>
 							<p class="text-xs text-zinc-500 leading-relaxed">Prompt injection, model inversion, training data poisoning, and adversarial machine learning techniques.</p>
 						</Card>
 					</div>
@@ -54,29 +77,37 @@ import { Send, MessageSquare, Target, Code } from 'lucide-vue-next';
 			</div>
 
 			<!-- Application Form -->
-			<Card class="p-8 flex flex-col items-center justify-center text-center">
-				<div class="w-16 h-16 rounded-full bg-white/5 border border-stealth flex items-center justify-center mb-6">
-					<Code class="w-8 h-8 text-accent-cyan" />
-				</div>
-				<h2 class="text-2xl font-black tracking-tighter mb-4">Ready to Begin?</h2>
-				<p class="text-zinc-500 mb-8 max-w-sm">
-					Our recruitment process is managed through a secure portal. Complete the application form to initiate the vetting process.
-				</p>
-				<Button 
-					href="https://forms.gle/qGwdCLBfnWv2cd6X8" 
-					variant="primary" 
-					size="lg" 
-					class="w-full"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Open Application Form
-					<Send class="w-4 h-4 ml-2" />
-				</Button>
-				<p class="mt-6 text-[10px] text-zinc-600 uppercase tracking-widest font-mono">
-					Security Clearance Level 1 Required
-				</p>
-			</Card>
+			<div class="px-2 lg:sticky lg:top-32">
+				<Card class="p-8 md:p-12 flex flex-col items-center justify-center text-center bg-graphite/40 border-accent-cyan/20 shadow-2xl shadow-accent-cyan/5">
+					<div class="w-20 h-20 rounded-2xl bg-accent-cyan/10 border border-accent-cyan/20 flex items-center justify-center mb-8 rotate-3 group-hover:rotate-0 transition-transform duration-500">
+						<Code class="w-10 h-10 text-accent-cyan" />
+					</div>
+					<h2 class="text-2xl md:text-3xl font-black tracking-tighter mb-4">Ready to Begin?</h2>
+					<p class="text-zinc-500 mb-10 max-w-sm text-sm md:text-base leading-relaxed">
+						Our recruitment process is managed through a secure portal. Complete the application form to initiate the vetting process.
+					</p>
+					<Button 
+						href="https://forms.gle/qGwdCLBfnWv2cd6X8" 
+						variant="primary" 
+						size="lg" 
+						class="w-full py-4 rounded-xl shadow-xl shadow-white/5 active:scale-95 transition-all"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Open Application Form
+						<Send class="w-4 h-4 ml-3" />
+					</Button>
+					<div class="mt-8 pt-8 border-t border-stealth w-full">
+						<div class="flex items-center justify-center gap-2 mb-2">
+							<MessageSquare class="w-3.5 h-3.5 text-accent-purple" />
+							<span class="text-[10px] text-zinc-500 uppercase tracking-[0.2em] font-mono font-bold">Vetting Process Active</span>
+						</div>
+						<p class="text-[9px] text-zinc-700 uppercase tracking-widest font-mono">
+							Security Clearance Level 1 Required
+						</p>
+					</div>
+				</Card>
+			</div>
 		</div>
 	</div>
 </Layout>

@@ -30,13 +30,13 @@ const systemStats = [
         <span class="text-zinc-100">./recon_target.sh --all</span>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div v-for="stat in systemStats" :key="stat.label" class="p-3 rounded-md border border-stealth bg-white/[0.02]">
-          <div class="flex items-center gap-2 mb-1">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+        <div v-for="stat in systemStats" :key="stat.label" class="p-2.5 sm:p-3 rounded-md border border-stealth bg-white/[0.02] flex sm:block items-center justify-between sm:justify-start">
+          <div class="flex items-center gap-2 mb-0 sm:mb-1">
             <component :is="stat.icon" class="w-3 h-3 text-accent-cyan" />
-            <span class="text-[10px] text-zinc-500 uppercase tracking-wider">{{ stat.label }}</span>
+            <span class="text-[9px] sm:text-[10px] text-zinc-500 uppercase tracking-wider">{{ stat.label }}</span>
           </div>
-          <div class="text-zinc-100 font-bold">{{ stat.value }}</div>
+          <div class="text-zinc-100 font-bold text-xs sm:text-sm">{{ stat.value }}</div>
         </div>
       </div>
 

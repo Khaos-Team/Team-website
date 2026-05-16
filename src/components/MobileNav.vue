@@ -1,21 +1,26 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, watch } from 'vue';
 import { Menu, X, Shield, Terminal, Trophy, Users, MessageSquare, Info, Send } from 'lucide-vue-next';
 
 const isOpen = ref(false);
 
 const toggleMenu = () => {
   isOpen.value = !isOpen.value;
-  if (isOpen.value) {
+};
+
+// Handle body scroll locking
+watch(isOpen, (newValue) => {
+  if (newValue) {
     document.body.style.overflow = 'hidden';
+    document.body.style.touchAction = 'none';
   } else {
     document.body.style.overflow = '';
+    document.body.style.touchAction = '';
   }
-};
+});
 
 const closeMenu = () => {
   isOpen.value = false;
-  document.body.style.overflow = '';
 };
 
 const navItems = [
@@ -29,16 +34,18 @@ const navItems = [
 
 onUnmounted(() => {
   document.body.style.overflow = '';
+  document.body.style.touchAction = '';
 });
 </script>
 
 <template>
   <div class="md:hidden">
-    <!-- Toggle Button -->
+    <!-- Toggle Button - Increased tap target and explicit z-index -->
     <button 
       @click="toggleMenu" 
-      class="p-2 text-zinc-400 hover:text-white transition-colors relative z-50"
+      class="w-12 h-12 flex items-center justify-center text-zinc-400 hover:text-white transition-colors relative z-[60] -mr-2"
       aria-label="Toggle Menu"
+      aria-expanded="isOpen"
     >
       <Menu v-if="!isOpen" class="w-6 h-6" />
       <X v-else class="w-6 h-6" />
@@ -46,38 +53,49 @@ onUnmounted(() => {
 
     <!-- Overlay Menu -->
     <Transition
-      enter-active-class="transition duration-300 ease-out"
+      enter-active-class="transition-all duration-300 ease-out"
       enter-from-class="opacity-0 translate-x-full"
       enter-to-class="opacity-100 translate-x-0"
-      leave-active-class="transition duration-200 ease-in"
+      leave-active-class="transition-all duration-200 ease-in"
       leave-from-class="opacity-100 translate-x-0"
       leave-to-class="opacity-0 translate-x-full"
     >
-      <div v-if="isOpen" class="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl flex flex-col">
-        <div class="flex-grow flex flex-col justify-center px-8 space-y-8">
+      <div v-if="isOpen" class="fixed inset-0 z-50 bg-background/98 backdrop-blur-2xl flex flex-col">
+        <!-- Close area (tapping outside items closes menu) -->
+        <div class="absolute inset-0 z-[-1]" @click="closeMenu"></div>
+
+        <div class="flex-grow flex flex-col justify-center px-8 space-y-6 pt-16">
           <div v-for="(item, index) in navItems" :key="item.name" 
                class="transform transition-all duration-500"
                :style="{ transitionDelay: `${index * 50}ms` }">
             <a 
               :href="item.href" 
               @click="closeMenu"
-              class="flex items-center gap-4 text-3xl font-black tracking-tighter uppercase transition-colors"
+              class="flex items-center gap-5 py-4 text-3xl font-black tracking-tighter uppercase transition-colors group active:scale-95"
               :class="item.primary ? 'text-accent-purple' : 'text-white hover:text-accent-cyan'"
             >
-              <component :is="item.icon" class="w-6 h-6" :class="item.primary ? 'text-accent-purple' : 'text-zinc-500'" />
+              <div class="w-10 h-10 rounded-lg border border-stealth flex items-center justify-center bg-graphite group-hover:border-accent-cyan/50 transition-colors">
+                <component :is="item.icon" class="w-5 h-5" :class="item.primary ? 'text-accent-purple' : 'text-zinc-500 group-hover:text-accent-cyan'" />
+              </div>
               {{ item.name }}
             </a>
           </div>
         </div>
 
         <!-- Footer Info -->
-        <div class="p-8 border-t border-stealth bg-graphite/50">
-          <div class="flex items-center gap-2 mb-2">
-            <Shield class="w-4 h-4 text-accent-purple" />
-            <span class="text-[10px] font-bold tracking-widest uppercase text-zinc-500">Khaos Collective</span>
+        <div class="p-8 border-t border-stealth bg-graphite/80 backdrop-blur-md">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-8 h-8 rounded-full bg-accent-purple/10 flex items-center justify-center border border-accent-purple/20">
+              <Shield class="w-4 h-4 text-accent-purple" />
+            </div>
+            <div class="flex flex-col">
+              <span class="text-[10px] font-black tracking-[0.2em] uppercase text-zinc-300">Khaos Collective</span>
+              <span class="text-[8px] font-mono text-accent-purple/60 uppercase tracking-widest">Protocol Active</span>
+            </div>
           </div>
-          <p class="text-[10px] text-zinc-600 font-mono uppercase tracking-widest">
-            Security Clearance Level 1 Required
+          <p class="text-[10px] text-zinc-600 font-mono uppercase tracking-[0.15em] leading-relaxed">
+            Unauthorized access strictly prohibited. <br/>
+            Clearance Level 1 Required.
           </p>
         </div>
       </div>
@@ -86,7 +104,7 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-.bg-background\/95 {
-  background-color: rgba(5, 5, 5, 0.95);
+.bg-background\/98 {
+  background-color: rgba(5, 5, 5, 0.98);
 }
 </style>
