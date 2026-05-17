@@ -5,8 +5,8 @@ export const members = [
 		bio: 'Specialist in prototype pollution and SSRF. Contributor to various open-source security tools.',
 		socials: [
 			{ platform: 'github', url: 'https://github.com/Daniel-wambua' },
-			{ platform: 'twitter', url: 'https://twitter.com/khaos' },
-			{ platform: 'guns.lol', url: 'https://guns.lol/khaos' }
+			{ platform: 'twitter', url: 'https://twitter.com/HavocRichie' },
+			{ platform: 'guns.lol', url: 'https://guns.lol/0xhavoc' }
 		],
 		image: '/images/avatars/havoc-avator.png',
 		skills: ['OSINT', 'Forensics', 'Pwn', 'Crypto']
